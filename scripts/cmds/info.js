@@ -4,8 +4,8 @@ const fs = require("fs");
 const path = require("path");
 
 const W = 490, H = 840;
-const AVATAR1 = "https://i.imgur.com/5L1We9h.jpeg";
-const FALLBACK_AVATAR = "https://i.ibb.co/MC6bT5V/default-avatar.png"; // fallback if error
+const AVATAR1 = "https://i.imgur.com/1tUVG85.jpeg";
+const FALLBACK_AVATAR = "https://i.imgur.com/1tUVG85.jpeg"; // fallback if error
 
 function formatUptime(ms) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -89,7 +89,7 @@ async function drawPage1(ctx) {
   ctx.fillStyle = "#ff99cc";
   ctx.shadowColor = "#ff33aa";
   ctx.shadowBlur = 25;
-  ctx.fillText("JABED ", W / 2, 295); // slightly lower
+  ctx.fillText("TAHA KHAN ", W / 2, 295); // slightly lower
 
   ctx.font = "italic 20px Arial";
   ctx.fillStyle = "#ff66cc";
@@ -113,10 +113,10 @@ async function drawPage1(ctx) {
   ctx.shadowBlur = 12;
 
   const lines = [
-    "Nickname: JABED ", "Age: 18+", "DOB: 10 Oct 2007*",
-    "Gender: Male", "Religion: Islam", "Nationality: Bangladeshi",
-    "Location: COX'S BAZAR ", "Class: Hsc candidate",
-    `Time: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Dhaka" })}`
+    "Nickname: TAHA KHAN ", "Age: 18+", "DOB: 10 Oct 2007*",
+    "Gender: Male", "Religion: Islam", "Nationality: pakistan ",
+    "Location: LAHOER ", "Class: Hsc candidate",
+    `Time: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Karachi" })}`
   ];
   let y = 400;
   for (const line of lines) {
@@ -128,7 +128,7 @@ async function drawPage1(ctx) {
   ctx.fillStyle = "#e673ff";
   ctx.shadowColor = "#ff99ff";
   ctx.shadowBlur = 25;
-  const obf = String.fromCharCode(169) + "JABED";
+  const obf = String.fromCharCode(169) + "TAHA KHAN";
   ctx.fillText(obf, W / 2, H - 35);
 }
 
@@ -137,7 +137,7 @@ module.exports = {
     name: "info",
     aliases: ["in4", "ownerinfo"],
     version: "1.0",
-    author: "JABED",
+    author: "TAHA KHAN",
     countDown: 5,
     role: 0,
     shortDescription: "Owner info",
