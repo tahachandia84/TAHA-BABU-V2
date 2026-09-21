@@ -50,7 +50,7 @@ function getBadge(p) {
 
 function makeCaption(percent, title) {
   const list = [
-    `${title}\n\n💓 দুজনের মিল: ${percent}%`,
+    `${title}\n\n💓 𝐋𝐎𝐕𝐄 𝐂𝐔𝐏𝐋: ${percent}%`,
     `${title}\n\n💘 Love Score: ${percent}%`,
     `${title}\n\n✨ Compatibility: ${percent}%`
   ];
