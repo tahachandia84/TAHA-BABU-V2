@@ -1,165 +1,71 @@
-const axios = require("axios");
-const { createCanvas, loadImage } = require("canvas");
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
-const FormData = require("form-data");
+const axios = require("axios");
 
-// === API utils ===
-async function getStreamFromURL(url) {
-  const res = await axios.get(url, { responseType: "stream" });
-  return res.data;
-}
-
-function generateRandomId(len = 16) {
-  const chars = "abcdef0123456789";
-  return Array.from({ length: len }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
-}
-
-async function getBalance() {
-  const pack = generateRandomId();
-  await axios.post("https://api.getglam.app/rewards/claim/hdnu30r7auc4kve", null, {
-    headers: {
-      "User-Agent": "Glam/1.58.4 Android/32 (Samsung SM-A156E)",
-      "glam-user-id": pack,
-      "user_id": pack,
-      "glam-local-date": new Date().toISOString(),
-    },
-  });
-  return pack;
-}
-
-async function uploadFile(pack, stream, prompt, duration) {
-  const form = new FormData();
-  form.append("package_id", pack);
-  form.append("media_file", stream);
-  form.append("media_type", "image");
-  form.append("template_id", "community_img2vid");
-  form.append("template_category", "20_coins_dur");
-  form.append("frames", JSON.stringify([{
-    prompt,
-    custom_prompt: prompt,
-    start: 0,
-    end: 0,
-    timings_units: "frames",
-    media_type: "image",
-    style_id: "chained_falai_img2video",
-    rate_modifiers: { duration: duration.toString() + "s" },
-  }]));
-
-  const res = await axios.post("https://android.getglam.app/v2/magic_video", form, {
-    headers: { ...form.getHeaders(), "User-Agent": "Glam/1.58.4 Android/32 (Samsung SM-A156E)" },
-  });
-
-  return res.data.event_id;
-}
-
-async function getStatus(taskID, pack) {
-  while (true) {
-    const res = await axios.get("https://android.getglam.app/v2/magic_video", {
-      params: { package_id: pack, event_id: taskID },
-      headers: { "User-Agent": "Glam/1.58.4 Android/32 (Samsung SM-A156E)" },
-    });
-    if (res.data.status === "READY") return [res.data];
-    await new Promise(r => setTimeout(r, 2000));
-  }
-}
-
-async function imgToVideo(prompt, filePath, duration = 5) {
-  const pack = await getBalance();
-  const task = await uploadFile(pack, fs.createReadStream(filePath), prompt, duration);
-  return await getStatus(task, pack);
-}
-
-// === Avatar fetch ===
-async function getAvatar(uid, usersData) {
-  let url = null;
-  try {
-    url = await usersData.getAvatarUrl(uid);
-  } catch (e) {}
-  if (!url) {
-    url = `https://graph.facebook.com/${uid}/picture?width=512&height=512`;
-  }
-  return url;
-}
-
-// === Merge two avatars into single img ===
-async function mergeAvatars(url1, url2) {
-  const img1 = await loadImage(url1);
-  const img2 = await loadImage(url2);
-  const size = 512;
-
-  const canvas = createCanvas(size * 2, size);
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(img1, 0, 0, size, size);
-  ctx.drawImage(img2, size, 0, size, size);
-
-  const cacheDir = path.join(__dirname, "cache");
-  if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir);
-
-  const filePath = path.join(cacheDir, `hug_${Date.now()}.png`);
-  fs.writeFileSync(filePath, canvas.toBuffer("image/png"));
-  return filePath;
-}
-
-// === Command ===
 module.exports = {
   config: {
     name: "hug",
-    aliases: ["xdis"],
-    version: "1.1",
-    author: "rX",
+    version: "1.0",
+    author: "Siam Ahmed Saan",
+    countDown: 5,
     role: 0,
-    description: "🤗 Send a hug animation with the person you tag or reply to",
-    category: "fun",
+    description:
+      "🤗 Create a cute hug image between you and your tagged partner! Just tag or reply to someone 💞",
+    category: "love",
     guide: {
-      en: "{pn} @tag\n{pn} (reply to someone)"
+      en: "{pn} @tag or reply — Generate hug image 🤗"
     }
   },
 
-  onStart: async function ({ event, message, usersData }) {
+  langs: {
+    en: {
+      noTag: "Please tag someone or reply to their message to use this command 🤗",
+      fail: "❌ | Couldn't generate hug image, Please try again later."
+    }
+  },
+
+  onStart: async function ({ event, message, usersData, args, getLang }) {
     const uid1 = event.senderID;
-    let uid2 = null;
-
-    // 1. রিপ্লাই থেকে নেওয়া
-    if (event.messageReply && event.messageReply.senderID) {
-      uid2 = event.messageReply.senderID;
-    }
-    // 2. ট্যাগ (@mention) থেকে নেওয়া
-    else if (event.mentions && Object.keys(event.mentions).length > 0) {
-      uid2 = Object.keys(event.mentions)[0]; // প্রথম ট্যাগ করা ইউজার
-    }
-
-    if (!uid2) {
-      return message.reply("❌ কাউকে ট্যাগ করো অথবা কারো মেসেজে রিপ্লাই দিয়ে `hug` লেখো 🤗");
-    }
-
-    if (uid1 === uid2) {
-      return message.reply("❌ নিজেকে হাগ করতে পারবে না 😅");
-    }
-
-    const url1 = await getAvatar(uid1, usersData);
-    const url2 = await getAvatar(uid2, usersData);
-
-    const prompt = "two people hugging each other, warm, realistic style";
-
-    const waitMsg = await message.reply("⏳ Generating your hug video...");
+    let uid2 = Object.keys(event.mentions || {})[0];
+    if (!uid2 && event.messageReply?.senderID) uid2 = event.messageReply.senderID;
+    if (!uid2) return message.reply(getLang("noTag"));
 
     try {
-      const mergedPath = await mergeAvatars(url1, url2);
-      const result = await imgToVideo(prompt, mergedPath);
+      const [name1, name2] = await Promise.all([
+        usersData.getName(uid1).catch(() => "Unknown"),
+        usersData.getName(uid2).catch(() => "Unknown")
+      ]);
 
-      const name1 = await usersData.getName(uid1);
-      const name2 = await usersData.getName(uid2);
+      const [avatar1, avatar2] = await Promise.all([
+        usersData.getAvatarUrl(uid1),
+        usersData.getAvatarUrl(uid2)
+      ]);
 
+      const GITHUB_RAW = "https://raw.githubusercontent.com/Saim-x69x/sakura/main/ApiUrl.json";
+      const rawRes = await axios.get(GITHUB_RAW);
+      const apiBase = rawRes.data.apiv1;
+      const apiURL = `${apiBase}/api/hug?boy=${encodeURIComponent(avatar1)}&girl=${encodeURIComponent(avatar2)}`;
+
+      const response = await axios.get(apiURL, { responseType: "arraybuffer" });
+
+      const savePath = path.join(__dirname, "tmp");
+      await fs.ensureDir(savePath);
+      const imgPath = path.join(savePath, `${uid1}_${uid2}_hug.jpg`);
+      await fs.writeFile(imgPath, response.data);
+
+      const text = `🤗 ${name1} just hugged ${name2}! ❤️`;
       await message.reply({
-        body: `🤗 | ${name1} hugged ${name2}!`,
-        attachment: await getStreamFromURL(result[0].video_url)
+        body: text,
+        attachment: fs.createReadStream(imgPath)
       });
 
-      fs.unlinkSync(mergedPath);
+      setTimeout(() => {
+        if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+      }, 5000);
+
     } catch (err) {
-      console.error("hug command error:", err);
-      message.reply("❌ Error while generating hug video.");
+      console.error("❌ Hug command error:", err);
+      return message.reply(getLang("fail"));
     }
   }
 };
