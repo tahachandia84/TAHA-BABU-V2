@@ -7,7 +7,7 @@ module.exports = {
   config: {
     name: "prefix",
     version: "1.7", 
-    author: "JABED D KURÕ",
+    author: "𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍",
     countDown: 5,
     role: 0,
     description: "Change the bot's prefix or show current prefix.",
@@ -34,7 +34,7 @@ module.exports = {
                 " ╰┈➤ \n 📌 𝐏𝐑𝐄𝐅𝐈𝐗 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍\n" +
                 " ╰┈➤🌐 Global:  %2\n" +
                 " ➥ 💬 This Chat:  %3\n\n"+
-                "〔 🎀 𝐎𝐰𝐧𝐞𝐫 : —͞JABED VAO 😈 〕\n\n" +
+                "〔 🎀 𝐎𝐰𝐧𝐞𝐫 : —͞𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍 😈 〕\n\n" +
                 "╰──────────────⧕"
     }
   },
