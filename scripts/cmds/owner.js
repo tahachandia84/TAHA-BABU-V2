@@ -6,7 +6,7 @@ module.exports = {
   config: {
     name: "owner",
     version: "1.3.1",
-    author: "JABED D KURÕ",
+    author: "𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍",
     role: 0,
     shortDescription: "Owner information with image",
     category: "Information",
@@ -18,21 +18,20 @@ module.exports = {
   onStart: async function ({ api, event }) {
     const ownerText = 
 `╭─ 👑 Oᴡɴᴇʀ Iɴғᴏ 👑 ─╮
-│ 👤 Nᴀᴍᴇ       : RORONOA JABED 
-│ 🧸 Nɪᴄᴋ       : JABED 
+│ 👤 Nᴀᴍᴇ       : 𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍 
+│ 🧸 Nɪᴄᴋ       : 𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍 
 │ 🎂 Aɢᴇ        : 18+
 │ 💘 Rᴇʟᴀᴛɪᴏɴ : Sɪɴɢʟᴇ
 │ 🎓 Pʀᴏғᴇssɪᴏɴ : Sᴛᴜᴅᴇɴᴛ
-│ 📚 Eᴅᴜᴄᴀᴛɪᴏɴ : Iɴᴛᴇʀ 2ɴᴅ Yᴇᴀʀ
-│ 🏡 Lᴏᴄᴀᴛɪᴏɴ : Cox's Bazar 
+│ 📚 Eᴅᴜᴄᴀᴛɪᴏɴ : ♡❥
 ├─ 🔗 Cᴏɴᴛᴀᴄᴛ ─╮
-│ 📘 Facebook  : "https://www.facebook.com/profile.php?id=61576355017916",
-│ 💬 Messenger: "https://m.me/61576355017916",
-│ 📞 WhatsApp  : wa.me/01840100926
+│ 📘 Facebook  : "https://www.facebook.com/profile.php?id=61590284352509",
+│ 💬 Messenger: "https://m.me/6159092284352509",
+│ 📞 WhatsApp  : wa.me/923474771404
 ╰────────────────╯`;
 
     // আপনার দেওয়া ছবির লিংক এখানে বসানো হয়েছে
-    const imgLink = "https://i.postimg.cc/prLHvQ11/1767018171452.jpg"; 
+    const imgLink = "https://i.imgur.com/1tUVG85.jpeg"; 
 
     const cacheDir = path.join(__dirname, "cache");
     const imgPath = path.join(cacheDir, `owner_${Date.now()}.jpg`);
