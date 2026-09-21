@@ -20,24 +20,26 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "61576355017916",
-    "100082814982394"
+    "61574350003076",
+    "61590284352509",
+    "61592685125925",
+    "61594401124651"
   ],
   "premiumUsers": [
-    "100082814982394",
-    "61576355017916"
+    "61590284352509",
+    "61590672685861"
   ],
   "devUsers": [
-    "100082814982394",
-    "61576355017916"
+    "61590284352509",
+    "61590672685861"
   ],
   "notes_premiumUsers": "List of user IDs with premium access (role 3)",
   "notes_devUsers": "List of developer IDs with full access (role 4)",
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [
-      "100082814982394",
-      "61576355017916"
+      "61590284352509",
+      "61590672685861"
     ],
     "notes": "if you enable this feature, only the ids in the whiteListIds list can use the bot"
   },
@@ -54,7 +56,7 @@
     "autoRefreshThreadInfoFirstTime": true,
     "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
   },
-  "timeZone": "Asia/Dhaka",
+  "timeZone": "Asia/Karachi",
   "dashBoard": {
     "enable": true,
     "expireVerifyCode": 300000,
