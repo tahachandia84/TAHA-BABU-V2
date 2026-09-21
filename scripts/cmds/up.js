@@ -62,10 +62,10 @@ module.exports = {
       ctx.shadowOffsetY = 2;
       ctx.shadowBlur = 4;
 
-      ctx.fillText("🤖 BOT UPTIME", 60, 100);
+      ctx.fillText("🤖 𝐁𝐎𝐓 𝐔𝐏𝐓𝐈𝐌𝐄", 60, 100);
       ctx.fillText(`⏳ ${upTimeStr}`, 60, 200);
       ctx.fillText(`⚡ Ping: ${ping}ms`, 60, 280);
-      ctx.fillText(`👤 Owner: JABED:`, 60, 360);
+      ctx.fillText(`👤 𝐎𝐖𝐍𝐄𝐑: 𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍:`, 60, 360);
 
       const buffer = canvas.toBuffer("image/png");
       fs.writeFileSync(imagePath, buffer);
@@ -79,7 +79,7 @@ module.exports = {
 ╭─╼━━━━━━━━╾─╮
 │ 💤 Uptime : ${upTimeStr}
 │ ⚡ Ping   : ${ping}ms
-│ 👑 Owner  : JABED
+│ 👑 𝐎𝐖𝐍𝐄𝐑  : 𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍
 ╰─━━━━━━━━━╾─╯
 ━━━━━━━━━━━━━━
         `,
