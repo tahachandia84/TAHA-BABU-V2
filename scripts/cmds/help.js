@@ -75,7 +75,7 @@ module.exports = {
  name: "help",
  aliases: "menu",
  version: "2.0",
- author: "rocky404",
+ author: "TAHA KHAN",
  countDown: 5,
  role: 0,
  shortDescription: { en: "Shows all commands or details." },
@@ -125,7 +125,7 @@ module.exports = {
  msg += "╭──────୨ৎ──────╮\n";
  msg += `╎ 🔢 𝐓𝐨𝐭𝐚𝐥 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬: ${total}\n`;
  msg += `╎ ⚡️ 𝐏𝐫𝐞𝐟𝐢𝐱: ${prefix}\n`;
- msg += "╎ 👤 𝐂𝐫𝐞𝐚𝐭𝐨𝐫: JABED\n";
+ msg += "╎ 👤 𝐎𝐖𝐍𝐄𝐑: 𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍\n";
  msg += "╰──────୨ৎ──────╯";
 
  return message.reply({
@@ -152,7 +152,7 @@ module.exports = {
  msg += "╭──────୨ৎ──────╮\n";
  msg += `╎ 🔢 𝐓𝐨𝐭𝐚𝐥 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬: ${commands.size}\n`;
  msg += `╎ ⚡️ 𝐏𝐫𝐞𝐟𝐢𝐱: ${prefix}\n`;
- msg += "╎ 👤 𝐂𝐫𝐞𝐚𝐭𝐨𝐫: JABED\n";
+ msg += "╎ 👤 𝐎𝐖𝐍𝐄𝐑: 𝐓𝐀𝐇𝐀 𝐊𝐇𝐀𝐍\n";
  msg += "╰──────୨ৎ──────╯";
 
  return message.reply({
